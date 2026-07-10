@@ -40,12 +40,14 @@
 
       <div class="row">
         <button id="save" type="button" class="primary">Save</button>
-        <button id="done" type="button" class="primary">Done</button>
+        <button id="done" type="button" class="ghost">Done</button>
         <button id="clear" type="button" class="ghost">Clear all defaults</button>
       </div>
       <p class="hint muted">
-        <strong>Done</strong> saves and closes this tab. You can also close the
-        tab with the browser’s ✕ like any other page.
+        <strong>Save</strong> applies changes immediately.
+        <strong>Clear</strong> only resets this form until you Save.
+        <strong>Done</strong> closes the tab — if you have unsaved changes, you’ll
+        be asked to save or discard.
       </p>
 
       <p id="status" class="status hidden" role="status"></p>
