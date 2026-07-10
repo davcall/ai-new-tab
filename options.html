@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Custom Start Page — Settings</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page options">
+    <main class="card">
+      <h1>Custom Start Page</h1>
+      <p class="muted">
+        This URL replaces Edge’s default MSN new-tab experience when you open a
+        new tab.
+      </p>
+
+      <label class="field">
+        <span>Start URL</span>
+        <input
+          id="url"
+          type="url"
+          placeholder="https://grok.com"
+          autocomplete="url"
+          spellcheck="false"
+        />
+      </label>
+
+      <fieldset class="field">
+        <legend>Open mode</legend>
+        <label class="radio">
+          <input type="radio" name="mode" value="redirect" checked />
+          Redirect to the URL (recommended)
+        </label>
+        <label class="radio">
+          <input type="radio" name="mode" value="iframe" />
+          Embed the page in the new tab
+        </label>
+      </fieldset>
+
+      <div class="row">
+        <button id="save" type="button" class="primary">Save</button>
+        <button id="clear" type="button" class="ghost">Clear</button>
+      </div>
+
+      <p id="status" class="status hidden" role="status"></p>
+      <p id="error" class="error hidden" role="alert"></p>
+
+      <section class="tips">
+        <h2>Edge tips</h2>
+        <ul>
+          <li>
+            Load this extension from
+            <code>edge://extensions</code> → Developer mode → Load unpacked.
+          </li>
+          <li>
+            To also change what opens when Edge starts, use
+            <strong>Settings → Start, home, and new tabs</strong>.
+          </li>
+          <li>
+            If MSN still appears, turn off
+            <strong>Show feed on new tab page</strong> content and ensure this
+            extension is enabled.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="shared.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New Tab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page newtab">
+    <main id="setup" class="card setup hidden" aria-live="polite">
+      <h1>Choose your start page</h1>
+      <p class="muted">
+        Edge opens this instead of the MSN feed. Paste any site you want as your
+        default new tab.
+      </p>
+
+      <label class="field">
+        <span>Start URL</span>
+        <input
+          id="url"
+          type="url"
+          placeholder="https://grok.com"
+          autocomplete="url"
+          spellcheck="false"
+        />
+      </label>
+
+      <fieldset class="field">
+        <legend>Open mode</legend>
+        <label class="radio">
+          <input type="radio" name="mode" value="redirect" checked />
+          Redirect (most reliable)
+        </label>
+        <label class="radio">
+          <input type="radio" name="mode" value="iframe" />
+          Embed in tab (only works on sites that allow framing)
+        </label>
+      </fieldset>
+
+      <div class="row">
+        <button id="save" type="button" class="primary">Save &amp; open</button>
+        <button id="options" type="button" class="ghost">Open settings later</button>
+      </div>
+
+      <p id="error" class="error hidden" role="alert"></p>
+
+      <p class="hint muted">
+        Tip: for Edge’s home button / startup page, also set
+        <strong>Settings → Start, home, and new tabs</strong> if you want the
+        same URL there.
+      </p>
+    </main>
+
+    <div id="frame-wrap" class="frame-wrap hidden">
+      <iframe id="frame" title="Custom start page" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+    </div>
+
+    <script src="shared.js"></script>
+    <script src="newtab.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local / secrets (none expected for this extension)
+.env
+.env.*
+*.local
+
+# Packaging
+*.zip
+*.crx
+*.pem
+dist/
+build/
+node_modules/
