@@ -9,6 +9,7 @@
   const saveBtn = document.getElementById("save");
   const optionsBtn = document.getElementById("options");
 
+  /** @type {string|null} */
   let selectedId = DEFAULTS.presetId;
 
   function showError(message) {
@@ -31,13 +32,15 @@
   function showSetup(settings) {
     setup.classList.remove("hidden");
     frameWrap.classList.add("hidden");
-    selectedId = settings.presetId;
+    selectedId =
+      settings.presetId === PRESET_NONE ? null : settings.presetId;
     urlInput.value = settings.customUrl || "";
     const mode = settings.openMode || "redirect";
     const radio = document.querySelector(`input[name="mode"][value="${mode}"]`);
     if (radio) radio.checked = true;
     applyPresetSelection(grid, selectedId);
     syncCustomFieldVisibility(customField, selectedId);
+    updateCustomCardPreview(grid, settings.customUrl || "");
   }
 
   function navigate(settings) {
@@ -50,28 +53,43 @@
       setup.classList.add("hidden");
       frameWrap.classList.remove("hidden");
       frame.src = result.url;
-      document.title = getPreset(settings.presetId).label || "Start";
+      const preset = getPreset(settings.presetId);
+      document.title = (preset && preset.label) || "Start";
     }
+    // blank + redirect already navigated via location.replace
   }
 
   renderPresetGrid(grid, {
     selectedId,
+    customUrl: "",
     onSelect: selectPreset,
   });
 
-  const settings = await getSettings();
-  const url = resolveStartUrl(settings);
+  urlInput.addEventListener("input", () => {
+    updateCustomCardPreview(grid, urlInput.value);
+  });
 
-  // First run / invalid custom → setup. Otherwise open immediately.
-  if (url && isValidHttpUrl(url)) {
-    navigate(settings);
+  const settings = await getSettings();
+
+  // Cleared → blank tab immediately. Valid URL → open it. Else setup UI.
+  if (settings.presetId === PRESET_NONE || !settings.presetId) {
+    openStartPage(settings);
   } else {
-    showSetup(settings);
+    const url = resolveStartUrl(settings);
+    if (url && isValidHttpUrl(url)) {
+      navigate(settings);
+    } else {
+      showSetup(settings);
+    }
   }
 
   saveBtn.addEventListener("click", async () => {
     clearError();
     try {
+      if (!selectedId || selectedId === PRESET_NONE) {
+        showError("Pick an AI or Custom before saving.");
+        return;
+      }
       const mode =
         document.querySelector('input[name="mode"]:checked')?.value || "redirect";
       const next = await saveSettings({

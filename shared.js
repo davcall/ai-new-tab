@@ -1,5 +1,10 @@
 /** Shared helpers for AI New Tab */
 
+/** No preset selected — new tabs open a blank page. */
+const PRESET_NONE = "none";
+
+const CUSTOM_URL_PREVIEW_MAX = 80;
+
 const PRESETS = [
   {
     id: "grok",
@@ -30,6 +35,7 @@ const PRESETS = [
     label: "Custom",
     subtitle: "Your URL",
     url: "",
+    wide: true,
   },
 ];
 
@@ -39,8 +45,23 @@ const DEFAULTS = {
   openMode: "redirect", // "redirect" | "iframe"
 };
 
+function isValidPresetId(id) {
+  return id === PRESET_NONE || PRESETS.some((p) => p.id === id);
+}
+
 function getPreset(id) {
-  return PRESETS.find((p) => p.id === id) || PRESETS[0];
+  return PRESETS.find((p) => p.id === id) || null;
+}
+
+/**
+ * Truncate a URL for display on the Custom button.
+ * Short URLs show in full; long ones keep the first ~80 chars + ellipsis.
+ */
+function truncateUrlPreview(url, maxLen = CUSTOM_URL_PREVIEW_MAX) {
+  const value = (url || "").trim();
+  if (!value) return "";
+  if (value.length <= maxLen) return value;
+  return `${value.slice(0, maxLen)}…`;
 }
 
 /**
@@ -78,9 +99,14 @@ function isValidHttpUrl(url) {
 
 /**
  * Resolve the effective start URL from settings.
+ * Returns "" when cleared (no preset) — caller opens a blank tab.
  */
 function resolveStartUrl(settings) {
+  if (!settings || settings.presetId === PRESET_NONE || !settings.presetId) {
+    return "";
+  }
   const preset = getPreset(settings.presetId);
+  if (!preset) return "";
   if (preset.id === "custom") {
     return settings.customUrl || "";
   }
@@ -91,9 +117,15 @@ function resolveStartUrl(settings) {
  * Human label for the current selection.
  */
 function resolveLabel(settings) {
+  if (!settings || settings.presetId === PRESET_NONE || !settings.presetId) {
+    return "None — blank new tab";
+  }
   const preset = getPreset(settings.presetId);
+  if (!preset) return "None — blank new tab";
   if (preset.id === "custom") {
-    return settings.customUrl ? `Custom · ${settings.customUrl}` : "Custom (not set)";
+    return settings.customUrl
+      ? `Custom · ${truncateUrlPreview(settings.customUrl)}`
+      : "Custom (not set)";
   }
   return `${preset.label} · ${preset.url}`;
 }
@@ -102,7 +134,10 @@ function resolveLabel(settings) {
  * Migrate v1 settings (startUrl only) → v2 (presetId + customUrl).
  */
 function migrateFromV1(stored) {
-  if (stored.presetId) return null;
+  // Only migrate when presetId was never written (v1 only had startUrl).
+  if (Object.prototype.hasOwnProperty.call(stored, "presetId")) {
+    return null;
+  }
   if (!stored.startUrl) return null;
 
   const url = stored.startUrl;
@@ -118,11 +153,13 @@ function migrateFromV1(stored) {
 }
 
 async function getSettings() {
-  const stored = await chrome.storage.sync.get({
-    ...DEFAULTS,
-    // legacy v1 key
-    startUrl: "",
-  });
+  // Read raw keys first so defaults don't hide v1 `startUrl`-only installs.
+  const stored = await chrome.storage.sync.get([
+    "presetId",
+    "customUrl",
+    "openMode",
+    "startUrl",
+  ]);
 
   const migrated = migrateFromV1(stored);
   if (migrated) {
@@ -135,7 +172,16 @@ async function getSettings() {
     };
   }
 
-  const presetId = PRESETS.some((p) => p.id === stored.presetId)
+  // First install: nothing stored → DEFAULTS (Grok).
+  if (stored.presetId === undefined || stored.presetId === null) {
+    return {
+      presetId: DEFAULTS.presetId,
+      customUrl: stored.customUrl || "",
+      openMode: stored.openMode === "iframe" ? "iframe" : DEFAULTS.openMode,
+    };
+  }
+
+  const presetId = isValidPresetId(stored.presetId)
     ? stored.presetId
     : DEFAULTS.presetId;
 
@@ -148,11 +194,17 @@ async function getSettings() {
 
 async function saveSettings(partial) {
   const current = await getSettings();
+
+  let presetId = current.presetId;
+  if (partial.presetId !== undefined) {
+    if (!isValidPresetId(partial.presetId)) {
+      throw new Error("Invalid preset selection.");
+    }
+    presetId = partial.presetId;
+  }
+
   const next = {
-    presetId:
-      partial.presetId !== undefined && PRESETS.some((p) => p.id === partial.presetId)
-        ? partial.presetId
-        : current.presetId,
+    presetId,
     customUrl:
       partial.customUrl !== undefined
         ? normalizeUrl(partial.customUrl)
@@ -173,12 +225,36 @@ async function saveSettings(partial) {
   }
 
   await chrome.storage.sync.set(next);
-  // Drop legacy key if still present
   await chrome.storage.sync.remove("startUrl");
   return next;
 }
 
+/**
+ * Clear all defaults: no preset selected, custom URL wiped.
+ * New tabs open a blank page (about:blank).
+ */
+async function clearAllDefaults() {
+  const next = {
+    presetId: PRESET_NONE,
+    customUrl: "",
+    openMode: "redirect",
+  };
+  await chrome.storage.sync.set(next);
+  await chrome.storage.sync.remove("startUrl");
+  return next;
+}
+
+/**
+ * Open the configured start page, or a blank tab when cleared.
+ * Returns false only when custom is selected but URL is missing/invalid
+ * (caller should show setup). Blank (none) returns { mode: "blank" }.
+ */
 function openStartPage(settings) {
+  if (!settings || settings.presetId === PRESET_NONE || !settings.presetId) {
+    location.replace("about:blank");
+    return { mode: "blank", url: "about:blank" };
+  }
+
   const url = resolveStartUrl(settings);
   if (!url || !isValidHttpUrl(url)) {
     return false;

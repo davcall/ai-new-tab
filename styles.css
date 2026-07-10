@@ -119,11 +119,6 @@ p {
   margin-bottom: 16px;
 }
 
-/* Five presets: 2x2 + full-width custom row still works as 2-col grid */
-.page.popup .preset-grid {
-  grid-template-columns: 1fr 1fr;
-}
-
 .preset-grid.compact {
   gap: 8px;
   margin-bottom: 12px;
@@ -142,6 +137,12 @@ p {
   color: var(--text);
   cursor: pointer;
   font: inherit;
+  min-width: 0; /* allow truncate inside grid */
+}
+
+/* Custom spans both columns (width of two AI buttons) */
+.preset-card.preset-wide {
+  grid-column: 1 / -1;
 }
 
 .preset-card:hover {
@@ -161,6 +162,10 @@ p {
 
 .preset-sub {
   font-size: 0.75rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .field {
