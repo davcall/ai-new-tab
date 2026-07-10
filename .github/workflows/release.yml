@@ -71,10 +71,10 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: New Tab ${{ steps.pack.outputs.version }}
+          name: AI New Tab ${{ steps.pack.outputs.version }}
           generate_release_notes: true
           body: |
-            ## New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL — ${{ steps.pack.outputs.version }}
+            ## AI New Tab: Claude, Gemini, ChatGPT, Grok or Custom URL — ${{ steps.pack.outputs.version }}
 
             ### Store package (upload this to Microsoft Partner Center)
             - `ai-new-tab.zip` — deterministic extension package

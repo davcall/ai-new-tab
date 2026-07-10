@@ -76,7 +76,7 @@ def build_zip(root: Path, out_path: Path, meta: dict) -> str:
 
     # Write build provenance into the package (not used at runtime; for auditors).
     provenance = {
-        "name": "New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL",
+        "name": "AI New Tab: Claude, Gemini, ChatGPT, Grok or Custom URL",
         "built_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "source": "https://github.com/davcall/edge-start-page",
         "git": meta,

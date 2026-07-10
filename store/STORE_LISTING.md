@@ -1,14 +1,14 @@
 # Microsoft Edge Add-ons — listing copy
 
 ## Extension name
-New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL
+AI New Tab: Claude, Gemini, ChatGPT, Grok or Custom URL
 
 ## Short description (from manifest)
 Replace Edge's MSN new tab with Claude, Gemini, ChatGPT, Grok, or any custom URL. Switch anytime.
 
 ## Full description (250+ chars)
 
-**New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL** replaces
+**AI New Tab: Claude, Gemini, ChatGPT, Grok or Custom URL** replaces
 Microsoft Edge’s cluttered MSN new-tab page with the destination you actually want.
 
 ### AI presets
@@ -46,7 +46,7 @@ https://github.com/davcall/edge-start-page/issues
 https://davcall.github.io/edge-start-page/privacy.html
 
 ## Single purpose
-Let users replace the Edge new-tab page with Claude, Gemini, ChatGPT, Grok, or any custom URL.
+Let users replace the Edge new-tab page with Claude, Gemini, ChatGPT, Grok, or any custom URL (AI New Tab).
 
 ## Permission justification
 **storage** — Save the selected preset, custom URL, and open mode.
@@ -55,7 +55,7 @@ Let users replace the Edge new-tab page with Claude, Gemini, ChatGPT, Grok, or a
 No.
 
 ## Search terms
-new tab, Claude, Gemini, ChatGPT, Grok, custom URL, MSN, AI, OpenAI, Anthropic, Google, xAI
+AI New Tab, new tab, Claude, Gemini, ChatGPT, Grok, custom URL, MSN, AI, OpenAI, Anthropic, Google, xAI
 
 ## Notes for certification
 1. Fresh install defaults to Claude.  

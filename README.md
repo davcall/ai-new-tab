@@ -1,4 +1,4 @@
-# New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL
+# AI New Tab: Claude, Gemini, ChatGPT, Grok or Custom URL
 
 Microsoft Edge extension that replaces the MSN new-tab feed with **Claude**,
 **Gemini**, **ChatGPT**, **Grok**, or **any custom URL**.
