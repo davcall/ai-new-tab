@@ -243,13 +243,45 @@ button.ghost:hover {
 }
 
 .error {
-  color: var(--danger);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
   margin: 0 0 12px;
 }
 
+.error::before {
+  content: "";
+  flex-shrink: 0;
+  width: 0.55em;
+  height: 0.55em;
+  margin-top: 0.4em;
+  border-radius: 50%;
+  background: var(--danger);
+}
+
+/* Success: normal-size body text + green OK dot (not faint green text) */
 .status {
-  color: var(--ok);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
   margin: 0 0 12px;
+}
+
+.status::before {
+  content: "";
+  flex-shrink: 0;
+  width: 0.55em;
+  height: 0.55em;
+  margin-top: 0.4em;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ok) 25%, transparent);
 }
 
 .hint {
