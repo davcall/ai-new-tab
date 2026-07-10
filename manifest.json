@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Customize New Tab to AI & More",
-  "version": "2.3.0",
-  "description": "Replace Edge's MSN new tab with Grok, Claude, ChatGPT, Gemini, or any custom URL. Switch anytime.",
+  "name": "New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL",
+  "version": "2.4.0",
+  "description": "Replace Edge's MSN new tab with Claude, Gemini, ChatGPT, Grok, or any custom URL. Switch anytime.",
   "permissions": ["storage"],
   "chrome_url_overrides": {
     "newtab": "newtab.html"
@@ -12,7 +12,7 @@
     "open_in_tab": true
   },
   "action": {
-    "default_title": "Customize New Tab to AI & More",
+    "default_title": "New Tab: Claude, Gemini, ChatGPT, Grok or Custom",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",

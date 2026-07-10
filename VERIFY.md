@@ -1,6 +1,6 @@
 # Verify what you install matches GitHub
 
-**Extension:** Customize New Tab to AI & More
+**Extension:** New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL
 
 This project publishes a **deterministic** Edge extension zip built by
 **GitHub Actions**, with a **SHA-256 checksum** and a **GitHub Artifact

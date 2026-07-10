@@ -1,18 +1,17 @@
-# Customize New Tab to AI & More
+# New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL
 
-Microsoft Edge extension that replaces the MSN new-tab feed with the AI you
-actually use — **Grok**, **Claude**, **ChatGPT**, **Gemini** — or **any custom
-URL**.
+Microsoft Edge extension that replaces the MSN new-tab feed with **Claude**,
+**Gemini**, **ChatGPT**, **Grok**, or **any custom URL**.
 
 **Repo:** https://github.com/davcall/edge-start-page
 
-## Tagline
+## Tagline / store short description
 
-> Replace Edge’s MSN new tab with Grok, Claude, ChatGPT, Gemini, or any custom URL. Switch anytime.
+> Replace Edge's MSN new tab with Claude, Gemini, ChatGPT, Grok, or any custom URL. Switch anytime.
 
 ## Features
 
-- One-click presets: Grok · Claude · ChatGPT · Gemini · Custom
+- One-click presets: Claude · Gemini · ChatGPT · Grok · Custom
 - Full-width Custom button shows your URL (truncated when long)
 - Toolbar popup for instant switching
 - **Clear all defaults** → blank new tab (`about:blank`)
@@ -38,17 +37,13 @@ URL**.
 
 ```bash
 python scripts/package.py
-# dist/ai-new-tab.zip
-# dist/ai-new-tab.zip.sha256
-# dist/build-meta.json
 ```
 
 ## Release (signed transparency)
 
 ```bash
-# after bumping version in manifest.json
-git tag v2.3.0
-git push origin v2.3.0
+git tag v2.4.0
+git push origin v2.4.0
 ```
 
 ```bash

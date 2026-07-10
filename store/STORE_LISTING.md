@@ -1,23 +1,23 @@
 # Microsoft Edge Add-ons — listing copy
 
 ## Extension name
-Customize New Tab to AI & More
+New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL
 
-## Short description (from manifest — store listing top)
-Replace Edge's MSN new tab with Grok, Claude, ChatGPT, Gemini, or any custom URL. Switch anytime.
+## Short description (from manifest)
+Replace Edge's MSN new tab with Claude, Gemini, ChatGPT, Grok, or any custom URL. Switch anytime.
 
 ## Full description (250+ chars)
 
-**Customize New Tab to AI & More** replaces Microsoft Edge’s cluttered MSN
-new-tab page with the destination you actually want.
+**New Tab: Choose Claude, Gemini, ChatGPT, Grok or a Custom URL** replaces
+Microsoft Edge’s cluttered MSN new-tab page with the destination you actually want.
 
 ### AI presets
-- **Grok** (xAI) — grok.com  
 - **Claude** (Anthropic) — claude.ai  
-- **ChatGPT** (OpenAI) — chatgpt.com  
 - **Gemini** (Google) — gemini.google.com  
+- **ChatGPT** (OpenAI) — chatgpt.com  
+- **Grok** (xAI) — grok.com  
 
-### And more
+### Custom & blank
 - **Custom** — any HTTPS URL (homepage, dashboard, search, email…)  
 - One-click switch from the toolbar popup  
 - **Clear all defaults** for a blank new tab when you want a clean slate  
@@ -46,7 +46,7 @@ https://github.com/davcall/edge-start-page/issues
 https://davcall.github.io/edge-start-page/privacy.html
 
 ## Single purpose
-Let users replace the Edge new-tab page with a chosen AI assistant site or any custom URL.
+Let users replace the Edge new-tab page with Claude, Gemini, ChatGPT, Grok, or any custom URL.
 
 ## Permission justification
 **storage** — Save the selected preset, custom URL, and open mode.
@@ -55,11 +55,11 @@ Let users replace the Edge new-tab page with a chosen AI assistant site or any c
 No.
 
 ## Search terms
-new tab, customize new tab, AI, ChatGPT, Claude, Grok, Gemini, MSN, custom URL, OpenAI, Anthropic, Google
+new tab, Claude, Gemini, ChatGPT, Grok, custom URL, MSN, AI, OpenAI, Anthropic, Google, xAI
 
 ## Notes for certification
-1. Fresh install defaults to Grok.  
-2. Switch presets via popup (Claude, ChatGPT, Gemini, Custom).  
-3. Clear all defaults → new tab is blank (about:blank), no preset selected.  
+1. Fresh install defaults to Claude.  
+2. Switch via popup: Claude, Gemini, ChatGPT, Grok, Custom.  
+3. Clear all defaults → blank new tab, no preset selected.  
 4. Custom shows truncated URL on the wide button.  
 5. Package = GitHub Release `ai-new-tab.zip` for the submitted version.

@@ -5,18 +5,19 @@ const PRESET_NONE = "none";
 
 const CUSTOM_URL_PREVIEW_MAX = 80;
 
+// Order matches product name: Claude, Gemini, ChatGPT, Grok, Custom
 const PRESETS = [
-  {
-    id: "grok",
-    label: "Grok",
-    subtitle: "xAI",
-    url: "https://grok.com",
-  },
   {
     id: "claude",
     label: "Claude",
     subtitle: "Anthropic",
     url: "https://claude.ai",
+  },
+  {
+    id: "gemini",
+    label: "Gemini",
+    subtitle: "Google",
+    url: "https://gemini.google.com",
   },
   {
     id: "chatgpt",
@@ -25,10 +26,10 @@ const PRESETS = [
     url: "https://chatgpt.com",
   },
   {
-    id: "gemini",
-    label: "Gemini",
-    subtitle: "Google",
-    url: "https://gemini.google.com",
+    id: "grok",
+    label: "Grok",
+    subtitle: "xAI",
+    url: "https://grok.com",
   },
   {
     id: "custom",
@@ -40,7 +41,8 @@ const PRESETS = [
 ];
 
 const DEFAULTS = {
-  presetId: "grok",
+  // First AI in the product name after "Choose"
+  presetId: "claude",
   customUrl: "",
   openMode: "redirect", // "redirect" | "iframe"
 };
