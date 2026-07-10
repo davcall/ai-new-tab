@@ -19,3 +19,5 @@ Desktop.ini
 dist/
 build/
 node_modules/
+store/*.zip
+store/*.zip.sha256

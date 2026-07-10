@@ -1,0 +1,97 @@
+# Build a deterministic store package, publish it on GitHub Releases,
+# and attach GitHub Artifact Attestations (Sigstore-backed provenance).
+#
+# Anyone can verify:
+#   gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
+#   sha256sum -c ai-new-tab.zip.sha256
+#
+# Upload the SAME ai-new-tab.zip from the release assets to Partner Center.
+
+name: Release package
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: "Create a GitHub Release for this run"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  package:
+    name: Build + attest store zip
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build deterministic package
+        id: pack
+        run: |
+          python scripts/package.py --out dist/ai-new-tab.zip --meta-out dist/build-meta.json
+          echo "sha256=$(cut -d' ' -f1 dist/ai-new-tab.zip.sha256)" >> "$GITHUB_OUTPUT"
+          echo "version=$(python -c "import json; print(json.load(open('manifest.json'))['version'])")" >> "$GITHUB_OUTPUT"
+
+      - name: Show package metadata
+        run: |
+          echo "Version: ${{ steps.pack.outputs.version }}"
+          echo "SHA-256: ${{ steps.pack.outputs.sha256 }}"
+          cat dist/build-meta.json
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: dist/ai-new-tab.zip
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-new-tab-${{ steps.pack.outputs.version }}
+          path: |
+            dist/ai-new-tab.zip
+            dist/ai-new-tab.zip.sha256
+            dist/build-meta.json
+
+      - name: Create GitHub Release (on version tags)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: AI New Tab ${{ steps.pack.outputs.version }}
+          generate_release_notes: true
+          body: |
+            ## AI New Tab ${{ steps.pack.outputs.version }}
+
+            ### Store package (upload this to Microsoft Partner Center)
+            - `ai-new-tab.zip` — deterministic extension package
+            - `ai-new-tab.zip.sha256` — SHA-256 checksum
+            - `build-meta.json` — commit, version, file list
+
+            **SHA-256:** `${{ steps.pack.outputs.sha256 }}`
+
+            ### Verify transparency
+            ```bash
+            gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
+            sha256sum -c ai-new-tab.zip.sha256
+            ```
+            Full guide: [VERIFY.md](https://github.com/davcall/edge-start-page/blob/main/VERIFY.md)
+
+            Source commit: `${{ github.sha }}`
+          files: |
+            dist/ai-new-tab.zip
+            dist/ai-new-tab.zip.sha256
+            dist/build-meta.json

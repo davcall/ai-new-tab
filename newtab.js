@@ -2,10 +2,14 @@
   const setup = document.getElementById("setup");
   const frameWrap = document.getElementById("frame-wrap");
   const frame = document.getElementById("frame");
+  const grid = document.getElementById("preset-grid");
+  const customField = document.getElementById("custom-field");
   const urlInput = document.getElementById("url");
   const errorEl = document.getElementById("error");
   const saveBtn = document.getElementById("save");
   const optionsBtn = document.getElementById("options");
+
+  let selectedId = DEFAULTS.presetId;
 
   function showError(message) {
     errorEl.textContent = message;
@@ -17,36 +21,50 @@
     errorEl.classList.add("hidden");
   }
 
+  function selectPreset(id) {
+    selectedId = id;
+    applyPresetSelection(grid, id);
+    syncCustomFieldVisibility(customField, id);
+    if (id === "custom") urlInput.focus();
+  }
+
   function showSetup(settings) {
     setup.classList.remove("hidden");
     frameWrap.classList.add("hidden");
-    if (settings.startUrl) urlInput.value = settings.startUrl;
+    selectedId = settings.presetId;
+    urlInput.value = settings.customUrl || "";
     const mode = settings.openMode || "redirect";
     const radio = document.querySelector(`input[name="mode"][value="${mode}"]`);
     if (radio) radio.checked = true;
-    urlInput.focus();
+    applyPresetSelection(grid, selectedId);
+    syncCustomFieldVisibility(customField, selectedId);
   }
 
-  function openStartPage(settings) {
-    if (settings.openMode === "iframe") {
-      setup.classList.add("hidden");
-      frameWrap.classList.remove("hidden");
-      frame.src = settings.startUrl;
-      document.title = "Start";
+  function navigate(settings) {
+    const result = openStartPage(settings);
+    if (!result) {
+      showSetup(settings);
       return;
     }
-    // Full navigation — most sites work, no framing restrictions.
-    location.replace(settings.startUrl);
+    if (result.mode === "iframe") {
+      setup.classList.add("hidden");
+      frameWrap.classList.remove("hidden");
+      frame.src = result.url;
+      document.title = getPreset(settings.presetId).label || "Start";
+    }
   }
 
+  renderPresetGrid(grid, {
+    selectedId,
+    onSelect: selectPreset,
+  });
+
   const settings = await getSettings();
-  // Prefer saved value; fall back to default (grok.com) so a fresh install
-  // never lands on Edge's MSN tab.
-  const url = settings.startUrl && isValidHttpUrl(settings.startUrl)
-    ? settings.startUrl
-    : DEFAULTS.startUrl;
+  const url = resolveStartUrl(settings);
+
+  // First run / invalid custom → setup. Otherwise open immediately.
   if (url && isValidHttpUrl(url)) {
-    openStartPage({ ...settings, startUrl: url });
+    navigate(settings);
   } else {
     showSetup(settings);
   }
@@ -57,14 +75,11 @@
       const mode =
         document.querySelector('input[name="mode"]:checked')?.value || "redirect";
       const next = await saveSettings({
-        startUrl: urlInput.value,
+        presetId: selectedId,
+        customUrl: urlInput.value,
         openMode: mode,
       });
-      if (!next.startUrl) {
-        showError("Enter a URL first.");
-        return;
-      }
-      openStartPage(next);
+      navigate(next);
     } catch (err) {
       showError(err.message || String(err));
     }

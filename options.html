@@ -3,23 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Make Grok Your New Tab — Settings</title>
+    <title>AI New Tab — Settings</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="page options">
     <main class="card">
-      <h1>Make Grok Your New Tab</h1>
+      <h1>AI New Tab</h1>
       <p class="muted">
-        New tabs open Grok by default. Change the URL below anytime if you want
-        a different start page.
+        Choose which AI (or custom site) opens when you create a new tab.
       </p>
 
-      <label class="field">
-        <span>Start URL</span>
+      <div id="preset-grid" class="preset-grid" role="radiogroup" aria-label="AI start page"></div>
+
+      <label id="custom-field" class="field hidden">
+        <span>Custom URL</span>
         <input
           id="url"
           type="url"
-          placeholder="https://grok.com"
+          placeholder="https://example.com"
           autocomplete="url"
           spellcheck="false"
         />
@@ -39,33 +40,49 @@
 
       <div class="row">
         <button id="save" type="button" class="primary">Save</button>
-        <button id="clear" type="button" class="ghost">Clear</button>
+        <button id="reset" type="button" class="ghost">Reset to Grok</button>
       </div>
 
       <p id="status" class="status hidden" role="status"></p>
       <p id="error" class="error hidden" role="alert"></p>
 
       <section class="tips">
+        <h2>Transparency</h2>
+        <ul>
+          <li>
+            Source:
+            <a href="https://github.com/davcall/edge-start-page" target="_blank" rel="noreferrer"
+              >github.com/davcall/edge-start-page</a
+            >
+          </li>
+          <li>
+            Store packages are built and attested on GitHub Actions — see
+            <a href="https://github.com/davcall/edge-start-page/blob/main/VERIFY.md" target="_blank" rel="noreferrer"
+              >VERIFY.md</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section class="tips">
         <h2>Edge tips</h2>
         <ul>
           <li>
-            Load this extension from
-            <code>edge://extensions</code> → Developer mode → Load unpacked.
+            This extension controls the <strong>new tab</strong> page only.
           </li>
           <li>
-            To also change what opens when Edge starts, use
-            <strong>Settings → Start, home, and new tabs</strong>.
+            For Home / startup: <strong>Settings → Start, home, and new tabs</strong>.
           </li>
           <li>
-            If MSN still appears, turn off
-            <strong>Show feed on new tab page</strong> content and ensure this
-            extension is enabled.
+            Load unpacked from
+            <code>edge://extensions</code> while developing.
           </li>
         </ul>
       </section>
     </main>
 
     <script src="shared.js"></script>
+    <script src="ui-presets.js"></script>
     <script src="options.js"></script>
   </body>
 </html>

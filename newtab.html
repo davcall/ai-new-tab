@@ -8,18 +8,20 @@
   </head>
   <body class="page newtab">
     <main id="setup" class="card setup hidden" aria-live="polite">
-      <h1>Make Grok your new tab</h1>
+      <h1>AI New Tab</h1>
       <p class="muted">
-        Edge will open this URL instead of the MSN feed. Defaults to Grok — paste
-        another site if you prefer.
+        Pick what opens instead of Edge’s MSN feed. Switch anytime from the
+        toolbar icon.
       </p>
 
-      <label class="field">
-        <span>Start URL</span>
+      <div id="preset-grid" class="preset-grid" role="radiogroup" aria-label="AI start page"></div>
+
+      <label id="custom-field" class="field hidden">
+        <span>Custom URL</span>
         <input
           id="url"
           type="url"
-          placeholder="https://grok.com"
+          placeholder="https://example.com"
           autocomplete="url"
           spellcheck="false"
         />
@@ -29,33 +31,38 @@
         <legend>Open mode</legend>
         <label class="radio">
           <input type="radio" name="mode" value="redirect" checked />
-          Redirect (most reliable)
+          Redirect (recommended)
         </label>
         <label class="radio">
           <input type="radio" name="mode" value="iframe" />
-          Embed in tab (only works on sites that allow framing)
+          Embed in tab (only if the site allows framing)
         </label>
       </fieldset>
 
       <div class="row">
         <button id="save" type="button" class="primary">Save &amp; open</button>
-        <button id="options" type="button" class="ghost">Open settings later</button>
+        <button id="options" type="button" class="ghost">Full settings</button>
       </div>
 
       <p id="error" class="error hidden" role="alert"></p>
 
       <p class="hint muted">
-        Tip: for Edge’s home button / startup page, also set
+        Home button / startup page are separate Edge settings — use
         <strong>Settings → Start, home, and new tabs</strong> if you want the
         same URL there.
       </p>
     </main>
 
     <div id="frame-wrap" class="frame-wrap hidden">
-      <iframe id="frame" title="Custom start page" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+      <iframe
+        id="frame"
+        title="AI start page"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+      ></iframe>
     </div>
 
     <script src="shared.js"></script>
+    <script src="ui-presets.js"></script>
     <script src="newtab.js"></script>
   </body>
 </html>

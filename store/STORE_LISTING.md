@@ -1,97 +1,68 @@
-# Microsoft Edge Add-ons — listing copy
-
-Paste these into Partner Center during submission.
+# Microsoft Edge Add-ons — listing copy (AI New Tab v2)
 
 ## Extension name
-Make Grok Your New Tab
+AI New Tab
 
 ## Short description (from manifest)
-Open Grok AI on every new tab instead of Edge's MSN feed. Change the URL anytime.
+Open Grok, Claude, ChatGPT, or any custom URL on every new tab instead of Edge's MSN feed.
 
 ## Full description (250+ chars)
 
-Tired of Microsoft Edge opening a new tab full of MSN news, ads, and clutter?
+Tired of Microsoft Edge opening a new tab full of MSN news and clutter?
 
-**Make Grok Your New Tab** replaces Edge’s default new-tab experience with
-Grok AI (grok.com) by default—or any other HTTPS page you prefer.
+**AI New Tab** lets you open the AI you actually use — or any site you want — every time you hit Ctrl+T.
 
-### What it does
-- Overrides the **New Tab** page in Microsoft Edge
-- Defaults to **https://grok.com** on first install (change anytime)
-- Saves your preference with browser storage (syncs with your Edge profile if sync is on)
-- Two open modes:
-  - **Redirect** (recommended) — instantly opens your site
-  - **Embed** — shows the site inside the new tab when the site allows framing
+### Built-in presets
+- **Grok** (xAI) — grok.com
+- **Claude** (Anthropic) — claude.ai
+- **ChatGPT** (OpenAI) — chatgpt.com
+- **Custom** — any https URL you choose
 
-### How to use
-1. Install the extension
-2. Open a new tab
-3. You’re taken to your start page (or a one-time setup if needed)
-4. Change the URL anytime via the toolbar icon → Settings, or Extension options
+Switch from the toolbar popup in one click. Settings page for open mode (redirect vs embed).
+
+### Transparency you can verify
+Store packages are built from public source on GitHub, with SHA-256 checksums and GitHub Artifact Attestations (Sigstore). Verify a release with:
+
+`gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page`
+
+Source and verify guide: https://github.com/davcall/edge-start-page
 
 ### Privacy
-This extension only stores the URL and open mode you set. It does not collect
-analytics, does not sell data, and does not send your browsing data to the
-publisher. See the Privacy Policy linked on this store page.
+Only stores your preset/URL preference locally (browser sync storage). No analytics. No publisher backend.
 
-### Notes
-- This controls the **new tab** page. Edge’s separate “Home button” and
-  “Open Microsoft Edge with” startup settings can still be configured under
-  Edge Settings → Start, home, and new tabs if you want the same URL there too.
+### Note
+This controls the **new tab** page. Edge Home/startup are separate under Settings → Start, home, and new tabs.
 
 ## Category
-Suggested: **Productivity** (or **Tools**)
+Productivity
 
 ## Website
 https://github.com/davcall/edge-start-page
 
-## Support contact
+## Support
 https://github.com/davcall/edge-start-page/issues
 
 ## Privacy Policy URL
 https://davcall.github.io/edge-start-page/privacy.html
 
-(If GitHub Pages is not enabled yet, use the raw path after enabling Pages:
-Repository Settings → Pages → Deploy from branch `main` / root.)
-
-## Single purpose description (Privacy form)
-Replace the Microsoft Edge new-tab page with a user-configured start URL so the
-user can open a preferred website (such as a search page or AI assistant)
-instead of the default MSN feed.
+## Single purpose
+Replace the Edge new-tab page with a user-selected AI assistant site (Grok, Claude, ChatGPT) or a custom URL.
 
 ## Permission justification
-**storage** — Saves the user-selected start URL and open mode (redirect vs
-iframe) so the preference persists across browser sessions.
+**storage** — Save the selected preset, custom URL, and open mode so preferences persist.
 
 ## Remote code?
-No. All extension code is packaged locally. Navigating to the user’s chosen
-website is normal browser navigation, not remote code execution by the extension.
-
-## Data usage
-- Collects: none of the listed personal-data categories for publisher servers
-- Stores locally only: start URL + open mode preference
-- Certify: no selling data; no unexpected collection; disclosures match this policy
+No. All extension code is in the package. Navigating to Grok/Claude/ChatGPT/custom is normal browser navigation.
 
 ## Search terms
-new tab, start page, homepage, MSN, replace new tab, custom new tab, grok,
-productivity
+new tab, AI, ChatGPT, Claude, Grok, MSN, custom new tab, OpenAI, Anthropic, xAI
 
-## Notes for certification testers
-1. Install the extension and open a new tab.
-2. Expected: browser navigates to https://grok.com (default) or shows setup if
-   storage was cleared.
-3. Open Extension options, set start URL to https://example.com, save, open a
-   new tab → should open example.com.
-4. Switch open mode to “Embed” for a frame-friendly site if testing iframe path;
-   redirect mode is the default and recommended path.
-5. No account/login is required. No backend services.
+## Notes for certification
+1. Install → new tab should open Grok by default (or setup if custom incomplete).
+2. Popup: switch to Claude, ChatGPT, Custom.
+3. Custom requires a valid https URL.
+4. No login/backend.
+5. Package should match GitHub Release `ai-new-tab.zip` for the submitted version (SHA-256 in release notes).
 
-## Assets in this folder
-| File | Use |
-|------|-----|
-| `logo-300.png` | Extension logo (300×300) |
-| `promo-small-440x280.png` | Small promotional tile |
-| `promo-large-1400x560.png` | Large promotional tile |
-| `screenshot-1280x800.png` | Screenshot (optional; placeholder mock) |
-| `screenshot-640x480.png` | Screenshot alt size |
-| `CustomStartPage-1.0.1.zip` | Upload package for Partner Center |
+## Upload package
+Use the **GitHub Release** asset `ai-new-tab.zip` for the version you submit — not a hand-zipped local folder — so attestation and store payload match.

@@ -1,51 +1,73 @@
-# Make Grok Your New Tab (Edge)
+# AI New Tab
 
-Minimal **Manifest V3** Edge extension that replaces the default MSN new-tab feed with **Grok** (or any URL you choose).
+Microsoft Edge extension that replaces the MSN new-tab feed with the AI you
+actually use — **Grok**, **Claude**, **ChatGPT**, or any **custom URL**.
+
+**Repo:** https://github.com/davcall/edge-start-page  
 
 ## Features
 
-- Overrides Edge **new tab** page
-- First open shows a setup form if no URL is saved
-- Settings page + toolbar popup
-- Two open modes:
-  - **Redirect** (default, most reliable)
-  - **Embed (iframe)** for sites that allow framing
+- One-click presets: Grok · Claude · ChatGPT · Custom
+- Toolbar popup for instant switching
+- Options page + first-run setup when needed
+- Redirect mode (default) or embed (iframe) mode
+- **Supply-chain transparency:** GitHub Actions builds a deterministic zip,
+  publishes SHA-256, and attaches a **Sigstore-backed attestation** so anyone
+  can prove the store package came from this repo
 
-## Install in Microsoft Edge
+## Install (development)
 
 1. Open `edge://extensions`
-2. Turn on **Developer mode** (bottom left)
-3. Click **Load unpacked**
-4. Select this folder:
-   `C:\Users\dcall\Documents\dev\edge-start-page`
-5. Open a new tab — set your preferred start URL (e.g. `https://duckduckgo.com`)
-6. Change later via the extension icon → **Settings**, or right-click the extension → **Extension options**
+2. Enable **Developer mode**
+3. **Load unpacked** → this folder
+4. Open a new tab → pick your AI
 
-## Pin it (optional)
+## Install (store / verified release)
 
-On `edge://extensions`, enable the extension and pin it to the toolbar for quick access to the current URL / settings.
+1. Download `ai-new-tab.zip` from
+   [Releases](https://github.com/davcall/edge-start-page/releases)
+2. Verify: see **[VERIFY.md](VERIFY.md)**
+3. Upload that zip to Partner Center, or sideload after unpacking
 
-## Edge settings note
+## Package locally
 
-This extension owns the **new tab** page. Separately, Edge can still open MSN-ish content for:
+```bash
+python scripts/package.py
+# dist/ai-new-tab.zip
+# dist/ai-new-tab.zip.sha256
+# dist/build-meta.json
+```
 
-- **Home button**
-- **What to open when Edge starts**
+## Release (signed transparency)
 
-Set those under **Settings → Start, home, and new tabs** if you want the same experience everywhere.
+```bash
+# after bumping version in manifest.json
+git tag v2.0.0
+git push origin v2.0.0
+```
 
-## Files
+GitHub Actions will:
 
-| File | Role |
-|------|------|
-| `manifest.json` | MV3 extension config + new-tab override |
-| `newtab.html` / `newtab.js` | New tab page + first-run setup |
-| `options.html` / `options.js` | Full settings page |
-| `popup.html` / `popup.js` | Toolbar popup |
-| `shared.js` | URL normalize + `chrome.storage.sync` |
-| `styles.css` | Shared UI |
-| `icons/` | Extension icons |
+1. Build a **deterministic** zip  
+2. **Attest** it (`actions/attest-build-provenance`)  
+3. Publish a **Release** with zip + checksum + metadata  
 
-## Develop
+Upload **only** the release’s `ai-new-tab.zip` to Microsoft Edge Add-ons.
 
-Edit files in this folder, then on `edge://extensions` click **Reload** on the extension card. Open a new tab to test.
+```bash
+gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
+```
+
+## Edge limitation
+
+Extensions can override **new tab** only. Home button and “open Edge with”
+are set under **Settings → Start, home, and new tabs**.
+
+## Privacy
+
+No analytics. Only stores your preset choice / custom URL via `chrome.storage.sync`.  
+Policy: https://davcall.github.io/edge-start-page/privacy.html
+
+## License
+
+MIT (see repository; add `LICENSE` if you want an explicit file).

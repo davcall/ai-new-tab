@@ -1,0 +1,32 @@
+# Continuous check: package builds cleanly on every push/PR.
+# Does not create a release (that is release.yml on tags).
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build package twice and compare hashes
+        run: |
+          python scripts/package.py --out dist/a.zip --meta-out dist/a.json
+          python scripts/package.py --out dist/b.zip --meta-out dist/b.json
+          ha=$(sha256sum dist/a.zip | awk '{print $1}')
+          hb=$(sha256sum dist/b.zip | awk '{print $1}')
+          echo "hash A: $ha"
+          echo "hash B: $hb"
+          test "$ha" = "$hb"
+          echo "Deterministic packaging OK"
