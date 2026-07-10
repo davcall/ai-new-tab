@@ -3,9 +3,35 @@
   const customField = document.getElementById("custom-field");
   const urlInput = document.getElementById("url");
   const saveBtn = document.getElementById("save");
+  const doneBtn = document.getElementById("done");
   const clearBtn = document.getElementById("clear");
   const statusEl = document.getElementById("status");
   const errorEl = document.getElementById("error");
+
+  function closeOptionsPage() {
+    // Works when Edge opened this as an extension options tab.
+    window.close();
+    // Fallback if the browser blocks close (rare): go to a blank tab.
+    setTimeout(() => {
+      if (!document.hidden) {
+        location.href = "about:blank";
+      }
+    }, 150);
+  }
+
+  async function saveCurrent() {
+    if (!selectedId || selectedId === PRESET_NONE) {
+      // Already cleared — nothing to save as a preset; treat as success.
+      return await getSettings();
+    }
+    const mode =
+      document.querySelector('input[name="mode"]:checked')?.value || "redirect";
+    return saveSettings({
+      presetId: selectedId,
+      customUrl: urlInput.value,
+      openMode: mode,
+    });
+  }
 
   /** @type {string|null} */
   let selectedId = DEFAULTS.presetId;
@@ -61,13 +87,7 @@
         showError("Pick an AI or Custom, or use Clear all defaults for a blank tab.");
         return;
       }
-      const mode =
-        document.querySelector('input[name="mode"]:checked')?.value || "redirect";
-      const next = await saveSettings({
-        presetId: selectedId,
-        customUrl: urlInput.value,
-        openMode: mode,
-      });
+      const next = await saveCurrent();
       paint(next);
       showStatus(`Saved: ${resolveLabel(next)}`);
     } catch (err) {
@@ -75,8 +95,21 @@
     }
   });
 
+  doneBtn.addEventListener("click", async () => {
+    try {
+      // If a preset is selected, save first; if cleared, just close.
+      if (selectedId && selectedId !== PRESET_NONE) {
+        const next = await saveCurrent();
+        paint(next);
+      }
+      closeOptionsPage();
+    } catch (err) {
+      showError(err.message || String(err));
+    }
+  });
+
   clearBtn.addEventListener("click", async () => {
-    const next = await clearAllDefaults();
+    await clearAllDefaults();
     // Deselect every preset radio; hide custom field; wipe URL
     selectedId = null;
     urlInput.value = "";
@@ -88,6 +121,6 @@
   });
 
   urlInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") saveBtn.click();
+    if (event.key === "Enter") doneBtn.click();
   });
 })();
