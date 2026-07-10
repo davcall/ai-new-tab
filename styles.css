@@ -290,3 +290,49 @@ button.ghost:hover {
   border: 0;
   background: white;
 }
+
+/* ---- Unsaved-changes modal ---- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(400px, 100%);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+.modal-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.modal-card p {
+  margin: 0 0 20px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-actions button {
+  width: 100%;
+}

@@ -46,8 +46,8 @@
       <p class="hint muted">
         <strong>Save</strong> applies changes immediately.
         <strong>Clear</strong> only resets this form until you Save.
-        <strong>Done</strong> closes the tab — if you have unsaved changes, you’ll
-        be asked to save or discard.
+        <strong>Done</strong> closes the tab — if you have unsaved changes, one
+        dialog lets you save, discard, or keep editing.
       </p>
 
       <p id="status" class="status hidden" role="status"></p>
@@ -87,6 +87,35 @@
         </ul>
       </section>
     </main>
+
+    <!-- Single unsaved-changes dialog (Save / Discard / Continue) -->
+    <div
+      id="unsaved-dialog"
+      class="modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="unsaved-title"
+      aria-describedby="unsaved-desc"
+    >
+      <div class="modal-backdrop" data-action="continue"></div>
+      <div class="modal-card">
+        <h2 id="unsaved-title">Unsaved changes</h2>
+        <p id="unsaved-desc" class="muted">
+          You have changes that aren’t saved yet. What would you like to do?
+        </p>
+        <div class="modal-actions">
+          <button type="button" class="primary" data-action="save">
+            Save changes
+          </button>
+          <button type="button" class="ghost" data-action="discard">
+            Discard changes
+          </button>
+          <button type="button" class="ghost" data-action="continue">
+            Continue editing
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script src="shared.js"></script>
     <script src="ui-presets.js"></script>

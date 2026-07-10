@@ -147,24 +147,50 @@
     });
   }
 
+  const unsavedDialog = document.getElementById("unsaved-dialog");
+
   /**
-   * Standard close flow: if dirty, ask Save / Discard / Cancel.
-   * confirm is limited to OK/Cancel in browsers, so we use a short two-step:
-   * 1) "You have unsaved changes. Save them?" → OK=save, Cancel=ask discard
-   * Actually better UX with a single confirm that explains both:
-   * Use window.confirm for Save, and if false use second for discard.
-   *
-   * Cleaner: one dialog via confirm:
-   * "Save changes before closing?\n\nOK = Save & close\nCancel = keep editing"
-   * Plus a separate "Discard & close" on Cancel path with second confirm?
-   *
-   * Standard pattern with only confirm():
-   * - confirm("Save changes?")
-   *   - OK → save & close
-   *   - Cancel → confirm("Discard changes and close?")
-   *       - OK → close without save
-   *       - Cancel → stay
+   * One dialog, three choices: save | discard | continue
+   * @returns {Promise<"save"|"discard"|"continue">}
    */
+  function askUnsavedChanges() {
+    return new Promise((resolve) => {
+      unsavedDialog.classList.remove("hidden");
+
+      const previouslyFocused = document.activeElement;
+      const saveBtnEl = unsavedDialog.querySelector('[data-action="save"]');
+      if (saveBtnEl) saveBtnEl.focus();
+
+      function finish(choice) {
+        unsavedDialog.classList.add("hidden");
+        unsavedDialog.removeEventListener("click", onClick);
+        document.removeEventListener("keydown", onKey);
+        if (previouslyFocused && previouslyFocused.focus) {
+          previouslyFocused.focus();
+        }
+        resolve(choice);
+      }
+
+      function onClick(event) {
+        const action = event.target.closest("[data-action]")?.dataset?.action;
+        if (action === "save" || action === "discard" || action === "continue") {
+          finish(action);
+        }
+      }
+
+      function onKey(event) {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          finish("continue");
+        }
+      }
+
+      unsavedDialog.addEventListener("click", onClick);
+      document.addEventListener("keydown", onKey);
+    });
+  }
+
+  /** Close flow: clean → close; dirty → one popup with 3 options. */
   async function handleDone() {
     clearMessages();
 
@@ -173,29 +199,26 @@
       return;
     }
 
-    const saveFirst = window.confirm(
-      "You have unsaved changes.\n\nOK — Save and close\nCancel — choose Discard or keep editing"
-    );
+    const choice = await askUnsavedChanges();
 
-    if (saveFirst) {
-      try {
-        const next = await saveCurrent();
-        paint(next);
-        markSaved(next);
-        closeOptionsPage();
-      } catch (err) {
-        showError(err.message || String(err));
-      }
+    if (choice === "continue") {
       return;
     }
 
-    const discard = window.confirm(
-      "Discard unsaved changes and close?\n\nOK — Discard and close\nCancel — Keep editing"
-    );
-    if (discard) {
-      // Restore UI from last saved so a re-open isn't confusing; then close.
+    if (choice === "discard") {
       paint(savedSnapshot);
       closeOptionsPage();
+      return;
+    }
+
+    // save
+    try {
+      const next = await saveCurrent();
+      paint(next);
+      markSaved(next);
+      closeOptionsPage();
+    } catch (err) {
+      showError(err.message || String(err));
     }
   }
 
