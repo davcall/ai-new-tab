@@ -26,8 +26,8 @@ Microsoft Edge’s cluttered MSN new-tab page with the destination you actually 
 - No analytics. Preferences stay in your browser.  
 - Store packages are built from public source on GitHub with SHA-256 checksums
   and GitHub Artifact Attestations (Sigstore).  
-  Verify: https://github.com/davcall/edge-start-page/blob/main/VERIFY.md  
-  Source: https://github.com/davcall/edge-start-page  
+  Verify: https://github.com/davcall/ai-new-tab/blob/main/VERIFY.md  
+  Source: https://github.com/davcall/ai-new-tab  
 
 ### Note
 This controls the **new tab** page. Edge Home/startup are separate under  
@@ -37,13 +37,13 @@ Settings → Start, home, and new tabs.
 Productivity
 
 ## Website
-https://github.com/davcall/edge-start-page
+https://github.com/davcall/ai-new-tab
 
 ## Support
-https://github.com/davcall/edge-start-page/issues
+https://github.com/davcall/ai-new-tab/issues
 
 ## Privacy Policy URL
-https://davcall.github.io/edge-start-page/privacy.html
+https://davcall.github.io/ai-new-tab/privacy.html
 
 ## Single purpose
 Let users replace the Edge new-tab page with Claude, Gemini, ChatGPT, Grok, or any custom URL (AI New Tab).

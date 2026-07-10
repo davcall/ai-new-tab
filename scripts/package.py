@@ -78,7 +78,7 @@ def build_zip(root: Path, out_path: Path, meta: dict) -> str:
     provenance = {
         "name": "AI New Tab: Claude, Gemini, ChatGPT, Grok or Custom URL",
         "built_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source": "https://github.com/davcall/edge-start-page",
+        "source": "https://github.com/davcall/ai-new-tab",
         "git": meta,
         "files": PACKAGE_FILES,
     }
@@ -139,8 +139,8 @@ def main() -> int:
         "package": str(out_path.relative_to(root)).replace("\\", "/"),
         "sha256": digest,
         "git": meta,
-        "source_repository": "https://github.com/davcall/edge-start-page",
-        "verify_docs": "https://github.com/davcall/edge-start-page/blob/main/VERIFY.md",
+        "source_repository": "https://github.com/davcall/ai-new-tab",
+        "verify_docs": "https://github.com/davcall/ai-new-tab/blob/main/VERIFY.md",
         "files": PACKAGE_FILES,
         "built_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }

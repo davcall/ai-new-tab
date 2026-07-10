@@ -20,7 +20,7 @@ Wait for **Release package** workflow → GitHub Release includes:
 2. Create / update extension  
 3. Upload **exactly** the release zip  
 4. Listing copy: `store/STORE_LISTING.md`  
-5. Privacy URL: https://davcall.github.io/edge-start-page/privacy.html  
+5. Privacy URL: https://davcall.github.io/ai-new-tab/privacy.html  
 
 ## 3. Announce the hash
 

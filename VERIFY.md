@@ -24,7 +24,7 @@ repository.
 Attestations use GitHub’s OIDC → Sigstore. **No long-lived private keys** are
 stored in the repo. Verification proves:
 
-1. The zip was built by a GitHub Actions workflow in `davcall/edge-start-page`
+1. The zip was built by a GitHub Actions workflow in `davcall/ai-new-tab`
 2. Which commit produced it
 3. The bytes have not been altered since attestation
 
@@ -34,7 +34,7 @@ Requires [GitHub CLI](https://cli.github.com/) (`gh`) authenticated optionally.
 
 ```bash
 # Download the release assets (example version)
-gh release download v2.0.0 --repo davcall/edge-start-page \
+gh release download v2.0.0 --repo davcall/ai-new-tab \
   --pattern "ai-new-tab.zip*" \
   --pattern "build-meta.json"
 
@@ -45,7 +45,7 @@ sha256sum -c ai-new-tab.zip.sha256
 # Compare to the hash inside ai-new-tab.zip.sha256
 
 # 2) Attestation / provenance
-gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
+gh attestation verify ai-new-tab.zip --repo davcall/ai-new-tab
 ```
 
 Expected: attestation verification **succeeds** and names this repository and
@@ -58,7 +58,7 @@ When the publisher uploads to Partner Center, they must use the **exact**
 
 Anyone can:
 
-1. Download `ai-new-tab.zip` from the [Releases](https://github.com/davcall/edge-start-page/releases) page
+1. Download `ai-new-tab.zip` from the [Releases](https://github.com/davcall/ai-new-tab/releases) page
 2. Note the SHA-256
 3. Ask the publisher (or check release notes / store support text) to confirm
    the Partner Center package hash matches
@@ -73,8 +73,8 @@ sha256sum path/to/mystery.zip
 ## Build the package yourself (reproducible)
 
 ```bash
-git clone https://github.com/davcall/edge-start-page.git
-cd edge-start-page
+git clone https://github.com/davcall/ai-new-tab.git
+cd ai-new-tab
 git checkout v2.0.0   # or the release tag
 python scripts/package.py
 # → dist/ai-new-tab.zip + dist/ai-new-tab.zip.sha256

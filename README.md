@@ -3,7 +3,7 @@
 Microsoft Edge extension that replaces the MSN new-tab feed with **Claude**,
 **Gemini**, **ChatGPT**, **Grok**, or **any custom URL**.
 
-**Repo:** https://github.com/davcall/edge-start-page
+**Repo:** https://github.com/davcall/ai-new-tab
 
 ## Tagline / store short description
 
@@ -29,7 +29,7 @@ Microsoft Edge extension that replaces the MSN new-tab feed with **Claude**,
 ## Install (store / verified release)
 
 1. Download `ai-new-tab.zip` from
-   [Releases](https://github.com/davcall/edge-start-page/releases)
+   [Releases](https://github.com/davcall/ai-new-tab/releases)
 2. Verify: see **[VERIFY.md](VERIFY.md)**
 3. Upload that zip to Partner Center, or sideload after unpacking
 
@@ -47,7 +47,7 @@ git push origin v2.4.0
 ```
 
 ```bash
-gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
+gh attestation verify ai-new-tab.zip --repo davcall/ai-new-tab
 ```
 
 ## Edge limitation
@@ -58,7 +58,7 @@ are set under **Settings → Start, home, and new tabs**.
 ## Privacy
 
 No analytics. Only stores your preset choice / custom URL via `chrome.storage.sync`.  
-Policy: https://davcall.github.io/edge-start-page/privacy.html
+Policy: https://davcall.github.io/ai-new-tab/privacy.html
 
 ## License
 

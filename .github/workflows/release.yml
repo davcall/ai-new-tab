@@ -2,7 +2,7 @@
 # and attach GitHub Artifact Attestations (Sigstore-backed provenance).
 #
 # Anyone can verify:
-#   gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
+#   gh attestation verify ai-new-tab.zip --repo davcall/ai-new-tab
 #   sha256sum -c ai-new-tab.zip.sha256
 #
 # Upload the SAME ai-new-tab.zip from the release assets to Partner Center.
@@ -85,10 +85,10 @@ jobs:
 
             ### Verify transparency
             ```bash
-            gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
+            gh attestation verify ai-new-tab.zip --repo davcall/ai-new-tab
             sha256sum -c ai-new-tab.zip.sha256
             ```
-            Full guide: [VERIFY.md](https://github.com/davcall/edge-start-page/blob/main/VERIFY.md)
+            Full guide: [VERIFY.md](https://github.com/davcall/ai-new-tab/blob/main/VERIFY.md)
 
             Source commit: `${{ github.sha }}`
           files: |
