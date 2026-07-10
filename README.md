@@ -1,26 +1,31 @@
-# AI New Tab
+# Customize New Tab to AI & More
 
 Microsoft Edge extension that replaces the MSN new-tab feed with the AI you
-actually use — **Grok**, **Claude**, **ChatGPT**, **Gemini**, or any **custom URL**.
+actually use — **Grok**, **Claude**, **ChatGPT**, **Gemini** — or **any custom
+URL**.
 
-**Repo:** https://github.com/davcall/edge-start-page  
+**Repo:** https://github.com/davcall/edge-start-page
+
+## Tagline
+
+> Replace Edge’s MSN new tab with Grok, Claude, ChatGPT, Gemini, or any custom URL. Switch anytime.
 
 ## Features
 
 - One-click presets: Grok · Claude · ChatGPT · Gemini · Custom
+- Full-width Custom button shows your URL (truncated when long)
 - Toolbar popup for instant switching
-- Options page + first-run setup when needed
+- **Clear all defaults** → blank new tab (`about:blank`)
 - Redirect mode (default) or embed (iframe) mode
 - **Supply-chain transparency:** GitHub Actions builds a deterministic zip,
-  publishes SHA-256, and attaches a **Sigstore-backed attestation** so anyone
-  can prove the store package came from this repo
+  publishes SHA-256, and attaches a **Sigstore-backed attestation**
 
 ## Install (development)
 
 1. Open `edge://extensions`
 2. Enable **Developer mode**
 3. **Load unpacked** → this folder
-4. Open a new tab → pick your AI
+4. Open a new tab → pick your destination
 
 ## Install (store / verified release)
 
@@ -42,17 +47,9 @@ python scripts/package.py
 
 ```bash
 # after bumping version in manifest.json
-git tag v2.0.0
-git push origin v2.0.0
+git tag v2.3.0
+git push origin v2.3.0
 ```
-
-GitHub Actions will:
-
-1. Build a **deterministic** zip  
-2. **Attest** it (`actions/attest-build-provenance`)  
-3. Publish a **Release** with zip + checksum + metadata  
-
-Upload **only** the release’s `ai-new-tab.zip` to Microsoft Edge Add-ons.
 
 ```bash
 gh attestation verify ai-new-tab.zip --repo davcall/edge-start-page
@@ -70,4 +67,4 @@ Policy: https://davcall.github.io/edge-start-page/privacy.html
 
 ## License
 
-MIT (see repository; add `LICENSE` if you want an explicit file).
+MIT

@@ -1,5 +1,7 @@
 # Verify what you install matches GitHub
 
+**Extension:** Customize New Tab to AI & More
+
 This project publishes a **deterministic** Edge extension zip built by
 **GitHub Actions**, with a **SHA-256 checksum** and a **GitHub Artifact
 Attestation** (Sigstore-backed provenance). That is how you can trust that the

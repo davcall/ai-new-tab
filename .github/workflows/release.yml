@@ -71,10 +71,10 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: AI New Tab ${{ steps.pack.outputs.version }}
+          name: Customize New Tab to AI & More ${{ steps.pack.outputs.version }}
           generate_release_notes: true
           body: |
-            ## AI New Tab ${{ steps.pack.outputs.version }}
+            ## Customize New Tab to AI & More ${{ steps.pack.outputs.version }}
 
             ### Store package (upload this to Microsoft Partner Center)
             - `ai-new-tab.zip` — deterministic extension package

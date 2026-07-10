@@ -76,7 +76,7 @@ def build_zip(root: Path, out_path: Path, meta: dict) -> str:
 
     # Write build provenance into the package (not used at runtime; for auditors).
     provenance = {
-        "name": "AI New Tab",
+        "name": "Customize New Tab to AI & More",
         "built_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "source": "https://github.com/davcall/edge-start-page",
         "git": meta,
@@ -112,7 +112,7 @@ def build_zip(root: Path, out_path: Path, meta: dict) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Package AI New Tab extension")
+    parser = argparse.ArgumentParser(description="Package Customize New Tab to AI & More")
     parser.add_argument(
         "--out",
         default="dist/ai-new-tab.zip",
