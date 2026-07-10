@@ -20,6 +20,12 @@ const PRESETS = [
     url: "https://chatgpt.com",
   },
   {
+    id: "gemini",
+    label: "Gemini",
+    subtitle: "Google",
+    url: "https://gemini.google.com",
+  },
+  {
     id: "custom",
     label: "Custom",
     subtitle: "Your URL",

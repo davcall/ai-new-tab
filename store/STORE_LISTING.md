@@ -4,7 +4,7 @@
 AI New Tab
 
 ## Short description (from manifest)
-Open Grok, Claude, ChatGPT, or any custom URL on every new tab instead of Edge's MSN feed.
+Open Grok, Claude, ChatGPT, Gemini, or any custom URL on every new tab instead of Edge's MSN feed.
 
 ## Full description (250+ chars)
 
@@ -16,6 +16,7 @@ Tired of Microsoft Edge opening a new tab full of MSN news and clutter?
 - **Grok** (xAI) — grok.com
 - **Claude** (Anthropic) — claude.ai
 - **ChatGPT** (OpenAI) — chatgpt.com
+- **Gemini** (Google) — gemini.google.com
 - **Custom** — any https URL you choose
 
 Switch from the toolbar popup in one click. Settings page for open mode (redirect vs embed).
@@ -46,7 +47,7 @@ https://github.com/davcall/edge-start-page/issues
 https://davcall.github.io/edge-start-page/privacy.html
 
 ## Single purpose
-Replace the Edge new-tab page with a user-selected AI assistant site (Grok, Claude, ChatGPT) or a custom URL.
+Replace the Edge new-tab page with a user-selected AI assistant site (Grok, Claude, ChatGPT, Gemini) or a custom URL.
 
 ## Permission justification
 **storage** — Save the selected preset, custom URL, and open mode so preferences persist.
@@ -55,11 +56,11 @@ Replace the Edge new-tab page with a user-selected AI assistant site (Grok, Clau
 No. All extension code is in the package. Navigating to Grok/Claude/ChatGPT/custom is normal browser navigation.
 
 ## Search terms
-new tab, AI, ChatGPT, Claude, Grok, MSN, custom new tab, OpenAI, Anthropic, xAI
+new tab, AI, ChatGPT, Claude, Grok, Gemini, MSN, custom new tab, OpenAI, Anthropic, xAI, Google
 
 ## Notes for certification
 1. Install → new tab should open Grok by default (or setup if custom incomplete).
-2. Popup: switch to Claude, ChatGPT, Custom.
+2. Popup: switch to Claude, ChatGPT, Gemini, Custom.
 3. Custom requires a valid https URL.
 4. No login/backend.
 5. Package should match GitHub Release `ai-new-tab.zip` for the submitted version (SHA-256 in release notes).

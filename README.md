@@ -1,13 +1,13 @@
 # AI New Tab
 
 Microsoft Edge extension that replaces the MSN new-tab feed with the AI you
-actually use — **Grok**, **Claude**, **ChatGPT**, or any **custom URL**.
+actually use — **Grok**, **Claude**, **ChatGPT**, **Gemini**, or any **custom URL**.
 
 **Repo:** https://github.com/davcall/edge-start-page  
 
 ## Features
 
-- One-click presets: Grok · Claude · ChatGPT · Custom
+- One-click presets: Grok · Claude · ChatGPT · Gemini · Custom
 - Toolbar popup for instant switching
 - Options page + first-run setup when needed
 - Redirect mode (default) or embed (iframe) mode

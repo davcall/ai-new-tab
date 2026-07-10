@@ -119,6 +119,11 @@ p {
   margin-bottom: 16px;
 }
 
+/* Five presets: 2x2 + full-width custom row still works as 2-col grid */
+.page.popup .preset-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
 .preset-grid.compact {
   gap: 8px;
   margin-bottom: 12px;

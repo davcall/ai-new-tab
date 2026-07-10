@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "AI New Tab",
-  "version": "2.0.0",
-  "description": "Open Grok, Claude, ChatGPT, or any custom URL on every new tab instead of Edge's MSN feed.",
+  "version": "2.1.0",
+  "description": "Open Grok, Claude, ChatGPT, Gemini, or any custom URL on every new tab instead of Edge's MSN feed.",
   "permissions": ["storage"],
   "chrome_url_overrides": {
     "newtab": "newtab.html"
