@@ -30,7 +30,7 @@ Docs: https://learn.microsoft.com/microsoft-edge/extensions/publish/create-dev-a
 
 Package ready at:
 
-`store/CustomStartPage-1.0.0.zip`
+`store/CustomStartPage-1.0.1.zip`
 
 1. Partner Center → Edge workspace → **Create new extension**
 2. Drag/drop the zip

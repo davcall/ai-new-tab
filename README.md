@@ -1,6 +1,6 @@
-# Custom Start Page (Edge)
+# Make Grok Your New Tab (Edge)
 
-Minimal **Manifest V3** Edge extension that replaces the default MSN new-tab feed with a URL you choose.
+Minimal **Manifest V3** Edge extension that replaces the default MSN new-tab feed with **Grok** (or any URL you choose).
 
 ## Features
 

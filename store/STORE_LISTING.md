@@ -3,18 +3,17 @@
 Paste these into Partner Center during submission.
 
 ## Extension name
-Custom Start Page
+Make Grok Your New Tab
 
 ## Short description (from manifest)
-Replace Edge's MSN new tab with a start page you choose.
+Open Grok AI on every new tab instead of Edge's MSN feed. Change the URL anytime.
 
 ## Full description (250+ chars)
 
 Tired of Microsoft Edge opening a new tab full of MSN news, ads, and clutter?
 
-**Custom Start Page** replaces Edge’s default new-tab experience with a website
-you actually want—whether that’s Grok, your search engine, a dashboard, email,
-or any other HTTPS page.
+**Make Grok Your New Tab** replaces Edge’s default new-tab experience with
+Grok AI (grok.com) by default—or any other HTTPS page you prefer.
 
 ### What it does
 - Overrides the **New Tab** page in Microsoft Edge
@@ -95,4 +94,4 @@ productivity
 | `promo-large-1400x560.png` | Large promotional tile |
 | `screenshot-1280x800.png` | Screenshot (optional; placeholder mock) |
 | `screenshot-640x480.png` | Screenshot alt size |
-| `CustomStartPage-1.0.0.zip` | Upload package for Partner Center |
+| `CustomStartPage-1.0.1.zip` | Upload package for Partner Center |
