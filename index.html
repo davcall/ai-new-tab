@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI New Tab — Trustworthy new tabs for Edge</title>
+    <meta
+      name="description"
+      content="Replace Edge’s MSN new tab with Claude, Gemini, ChatGPT, Grok, or any custom URL. Open source, minimal permissions, GitHub-attested packages."
+    />
+    <meta name="theme-color" content="#0f1419" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0c1016;
+        --surface: #151b24;
+        --surface-2: #1c2430;
+        --text: #e8eef6;
+        --muted: #93a1b3;
+        --accent: #3b82f6;
+        --accent-soft: rgba(59, 130, 246, 0.14);
+        --ok: #34d399;
+        --border: #2a3444;
+        --max: 720px;
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f3f5f8;
+          --surface: #ffffff;
+          --surface-2: #f0f3f7;
+          --text: #0f172a;
+          --muted: #5b6b7c;
+          --border: #d8e0ea;
+          --accent-soft: rgba(37, 99, 235, 0.1);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+
+      header {
+        margin-bottom: 40px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        font-weight: 650;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 12px;
+        margin: 0 0 18px;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--ok);
+      }
+
+      h1 {
+        font-size: clamp(1.75rem, 4vw, 2.35rem);
+        line-height: 1.2;
+        font-weight: 700;
+        margin: 0 0 14px;
+        letter-spacing: -0.02em;
+      }
+
+      .lead {
+        font-size: 1.125rem;
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      a.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: 650;
+        border-radius: 10px;
+        padding: 12px 18px;
+        border: 1px solid transparent;
+      }
+
+      a.btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      a.btn-primary:hover {
+        filter: brightness(1.06);
+      }
+
+      a.btn-ghost {
+        background: transparent;
+        color: var(--text);
+        border-color: var(--border);
+      }
+
+      a.btn-ghost:hover {
+        border-color: var(--muted);
+      }
+
+      section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 16px;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin: 0 0 12px;
+        letter-spacing: -0.01em;
+      }
+
+      p {
+        margin: 0 0 14px;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      li strong {
+        color: var(--text);
+      }
+
+      blockquote {
+        margin: 0;
+        padding: 16px 18px;
+        border-left: 3px solid var(--accent);
+        background: var(--surface-2);
+        border-radius: 0 12px 12px 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      blockquote strong {
+        color: var(--text);
+      }
+
+      .grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      @media (min-width: 560px) {
+        .grid.two {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .card {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 0.95rem;
+      }
+
+      .card p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      code {
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 0.9em;
+        background: var(--surface-2);
+        padding: 1px 6px;
+        border-radius: 6px;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      footer {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      footer p {
+        margin: 0 0 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <p class="eyebrow">Open source · Edge · Attested builds</p>
+        <h1>AI New Tab</h1>
+        <p class="lead">
+          Replace Microsoft Edge’s MSN-stuffed new tab with
+          <strong>Claude</strong>, <strong>Gemini</strong>,
+          <strong>ChatGPT</strong>, <strong>Grok</strong>, or
+          <strong>any URL you choose</strong> — including a local device on your
+          network.
+        </p>
+        <div class="actions">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/davcall/ai-new-tab/releases/latest"
+            >Get the package</a
+          >
+          <a class="btn btn-ghost" href="https://github.com/davcall/ai-new-tab"
+            >View source</a
+          >
+          <a class="btn btn-ghost" href="VERIFY.md">Verify a release</a>
+        </div>
+      </header>
+
+      <section>
+        <h2>Why we built it</h2>
+        <p>
+          We got tired of opening a new tab in Edge and landing on a feed we
+          didn’t ask for — news, ads, clutter — when what we wanted was simple:
+          go somewhere useful. Often that’s an AI assistant. Sometimes it’s a
+          homepage. Sometimes it’s an IoT dashboard on the LAN.
+        </p>
+        <p class="muted">
+          The store is full of “new tab” extensions. Some work. Many feel like
+          black boxes: oversized permissions, opaque updates, no way to know if
+          the bits you install match anything you can audit. Popularity is not a
+          security guarantee. We wanted something small enough to reason about
+          and honest enough to inspect.
+        </p>
+      </section>
+
+      <section>
+        <h2>Security is a principle — not a popularity contest</h2>
+        <blockquote>
+          <strong>Trust isn’t “everyone uses it.”</strong> Trust is knowing what
+          the software does, what it can access, and how the package you install
+          was produced. Transparency is the foundation; downloads and stars are
+          optional after that.
+        </blockquote>
+        <p style="margin-top: 16px">
+          That’s the bar we set for AI New Tab:
+        </p>
+        <ul>
+          <li>
+            <strong>Minimal permissions</strong> — only
+            <code>storage</code> for your prefs. No host access, no content
+            scripts on every site, no browsing-history scooping.
+          </li>
+          <li>
+            <strong>No publisher backend</strong> — we don’t run analytics on
+            your new tabs. Preferences stay in your browser (and optional Edge
+            sync).
+          </li>
+          <li>
+            <strong>Open source</strong> — the code is public. Read it, fork it,
+            disagree with it.
+          </li>
+          <li>
+            <strong>Attested releases</strong> — GitHub Actions builds a
+            deterministic zip and attaches supply-chain provenance so you can
+            check that the store package matches the repo.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>What it does</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>AI presets</h3>
+            <p>Claude, Gemini, ChatGPT, Grok — one click from the toolbar.</p>
+          </div>
+          <div class="card">
+            <h3>Custom URL</h3>
+            <p>
+              Any <code>https://</code> site — or <code>http://</code> for local
+              network / IoT devices.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Clear defaults</h3>
+            <p>Want a blank new tab? Clear and save. No forced destination.</p>
+          </div>
+          <div class="card">
+            <h3>Your control</h3>
+            <p>
+              Change destination anytime. Unsaved settings ask save, discard, or
+              keep editing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>How to install</h2>
+        <p class="muted">
+          While the Edge Add-ons listing is in review (or if you prefer side
+          loading from source of truth):
+        </p>
+        <ol class="muted" style="padding-left: 1.2rem; margin: 0">
+          <li style="margin-bottom: 8px">
+            Download <code>ai-new-tab.zip</code> from the
+            <a href="https://github.com/davcall/ai-new-tab/releases/latest"
+              >latest GitHub Release</a
+            >.
+          </li>
+          <li style="margin-bottom: 8px">
+            Optional but recommended:
+            <a href="VERIFY.md">verify the attestation and SHA-256</a>.
+          </li>
+          <li style="margin-bottom: 8px">
+            Open <code>edge://extensions</code> → Developer mode →
+            <strong>Load unpacked</strong> (unzip first), or submit that same zip
+            via Partner Center if you’re the publisher.
+          </li>
+          <li>
+            Open a new tab. Pick Claude, Gemini, ChatGPT, Grok, or Custom.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Transparency links</h2>
+        <ul>
+          <li>
+            <a href="https://github.com/davcall/ai-new-tab">Source repository</a>
+          </li>
+          <li>
+            <a href="https://github.com/davcall/ai-new-tab/releases"
+              >Signed / attested releases</a
+            >
+          </li>
+          <li><a href="VERIFY.md">How to verify a package</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>
+          Built because default Edge new tabs wasted our time — and because
+          “trust me, it’s popular” isn’t a security model.
+        </p>
+        <p>
+          © davcall ·
+          <a href="https://github.com/davcall/ai-new-tab">github.com/davcall/ai-new-tab</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
