@@ -58,6 +58,29 @@
         margin-bottom: 40px;
       }
 
+      .hero-title {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin: 0 0 14px;
+      }
+
+      .hero-title img {
+        width: 72px;
+        height: 72px;
+        border-radius: 16px;
+        flex-shrink: 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      @media (min-width: 560px) {
+        .hero-title img {
+          width: 96px;
+          height: 96px;
+          border-radius: 20px;
+        }
+      }
+
       .eyebrow {
         display: inline-flex;
         align-items: center;
@@ -86,7 +109,7 @@
         font-size: clamp(1.75rem, 4vw, 2.35rem);
         line-height: 1.2;
         font-weight: 700;
-        margin: 0 0 14px;
+        margin: 0;
         letter-spacing: -0.02em;
       }
 
@@ -243,7 +266,15 @@
     <div class="wrap">
       <header>
         <p class="eyebrow">Open source · Edge · Attested builds</p>
-        <h1>AI New Tab</h1>
+        <div class="hero-title">
+          <img
+            src="icon-300.png"
+            width="300"
+            height="300"
+            alt="AI New Tab icon"
+          />
+          <h1>AI New Tab</h1>
+        </div>
         <p class="lead">
           Replace Microsoft Edge’s MSN-stuffed new tab with
           <strong>Claude</strong>, <strong>Gemini</strong>,
