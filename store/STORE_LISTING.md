@@ -26,8 +26,10 @@ Microsoft Edge’s cluttered MSN new-tab page with the destination you actually 
 - No analytics. Preferences stay in your browser.  
 - Store packages are built from public source on GitHub with SHA-256 checksums
   and GitHub Artifact Attestations (Sigstore).  
+  Homepage: https://davcall.github.io/ai-new-tab/  
   Verify: https://github.com/davcall/ai-new-tab/blob/main/VERIFY.md  
   Source: https://github.com/davcall/ai-new-tab  
+  Author: https://www.linkedin.com/in/david-callaghan-4260a91/  
 
 ### Note
 This controls the **new tab** page. Edge Home/startup are separate under  
@@ -37,7 +39,7 @@ Settings → Start, home, and new tabs.
 Productivity
 
 ## Website
-https://github.com/davcall/ai-new-tab
+https://davcall.github.io/ai-new-tab/
 
 ## Support
 https://github.com/davcall/ai-new-tab/issues

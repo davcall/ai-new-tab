@@ -3,7 +3,11 @@
 Microsoft Edge extension that replaces the MSN new-tab feed with **Claude**,
 **Gemini**, **ChatGPT**, **Grok**, or **any custom URL**.
 
-**Repo:** https://github.com/davcall/ai-new-tab
+| | |
+|--|--|
+| **Homepage** | https://davcall.github.io/ai-new-tab/ |
+| **Repo** | https://github.com/davcall/ai-new-tab |
+| **Author** | [David Callaghan](https://www.linkedin.com/in/david-callaghan-4260a91/) |
 
 ## Tagline / store short description
 

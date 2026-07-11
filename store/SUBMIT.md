@@ -12,11 +12,19 @@ Use **only** the GitHub Release asset (not a hand-zipped folder):
 
 **Release:** https://github.com/davcall/ai-new-tab/releases/latest  
 
+**Website (store form):**  
+https://davcall.github.io/ai-new-tab/  
+
 **Privacy policy URL (store form):**  
 https://davcall.github.io/ai-new-tab/privacy.html  
 
 **Source / support:**  
 https://github.com/davcall/ai-new-tab  
+https://github.com/davcall/ai-new-tab/issues  
+
+**Author:**  
+https://www.linkedin.com/in/david-callaghan-4260a91/  
+
 
 ## Partner Center checklist
 

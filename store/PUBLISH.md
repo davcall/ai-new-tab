@@ -20,7 +20,9 @@ Wait for **Release package** workflow → GitHub Release includes:
 2. Create / update extension  
 3. Upload **exactly** the release zip  
 4. Listing copy: `store/STORE_LISTING.md`  
-5. Privacy URL: https://davcall.github.io/ai-new-tab/privacy.html  
+5. Website: https://davcall.github.io/ai-new-tab/  
+6. Privacy URL: https://davcall.github.io/ai-new-tab/privacy.html  
+7. Author (optional / bio): https://www.linkedin.com/in/david-callaghan-4260a91/  
 
 ## 3. Announce the hash
 
